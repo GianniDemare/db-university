@@ -1,0 +1,104 @@
+create database `db_university_schema`;
+use `db_university_schema`;
+
+create table `departments`(
+      name varchar(100) not null,
+      address varchar(255),
+      phone int,
+      email varchar(50),
+      website varchar(255),
+      head_of_departments varchar(255),
+      id INT NOT NULL AUTO_INCREMENT,
+	  PRIMARY KEY (id)
+);
+
+create table `degrees`(
+      name varchar(100),
+      `level` int,
+      address varchar(255),
+      email varchar(50),
+      website varchar(255),
+      id INT NOT NULL AUTO_INCREMENT,
+	  PRIMARY KEY (id)
+);
+
+create table `students`(
+      name varchar(100),
+      surname varchar(255),
+      date_of_birth date,
+      fiscal_code varchar(20),
+      enrolment_date date,
+      registration_number int,
+      email varchar(50),
+      id INT NOT NULL AUTO_INCREMENT,
+	  PRIMARY KEY (id)
+);
+
+ALTER TABLE `degrees`
+ADD COLUMN department_id INT;
+
+ALTER TABLE `degrees`
+ADD FOREIGN KEY (department_id) REFERENCES departments(id);
+
+ALTER TABLE `students`
+ADD COLUMN degree_id INT;
+
+ALTER TABLE `students`
+ADD FOREIGN KEY (degree_id) REFERENCES degrees(id);
+
+-- Inserire dati nella tabella "departments"
+INSERT INTO departments (name, address, phone, email, website, head_of_departments) VALUES
+    ('Science', 'via ciao,5', 3334564646, 'science@gmail.com', 'www.science.com', 'Gerry Scotti');
+   
+INSERT INTO departments (name, address, phone, email, website, head_of_departments) VALUES
+    ('History', 'via bella,10', 3334994633, 'history@gmail.com', 'www.history.com', 'Pinco Pallino');
+    
+INSERT INTO departments (name, address, phone, email, website, head_of_departments) VALUES
+    ('Geography', 'via bella ciao,22', 3331564625, 'geography@gmail.com', 'www.geography.com', 'White Pearl');
+ 
+INSERT INTO departments (name, address, phone, email, website, head_of_departments) VALUES
+    ('Physics', 'via ciao bella,55', 3431564625, 'physics@gmail.com', 'www.physics.com', 'Pearl White');
+   
+INSERT INTO departments (name, address, phone, email, website, head_of_departments) VALUES
+    ('Computer Science', 'via trottorellando,90', 3451564695, 'computerscience@gmail.com', 'www.computerscience.com', 'Gianni Celeste');
+   
+
+-- Inserire dati nella tabella "degrees"
+INSERT INTO degrees (name, `level`, address, email, website, department_id) VALUES
+    ('Laurea in Scienze', 'Triennale' 'via scienze,5', 'scienze@gmail.com', 'www.science.com', 1);
+    
+INSERT INTO degrees (name, `level`, address, email, website, department_id) VALUES
+    ('Laurea in Storia', 'Magistrale' 'via storia,32', 'storia@gmail.com', 'www.storia.com', 2);
+    
+INSERT INTO degrees (name, `level`, address, email, website, department_id) VALUES
+    ('Laurea in Geografia', 'Triennale' 'via geografia,55', 'geografia@gmail.com', 'www.geografia.com', 3);
+    
+INSERT INTO degrees (name, `level`, address, email, website, department_id) VALUES
+    ('Laurea in Fisica', 'Magistrale' 'via fisica,22', 'fisica@gmail.com', 'www.fisica.com', 4);
+    
+INSERT INTO degrees (name, `level`, address, email, website, department_id) VALUES
+    ('Laurea in Informatica', 'Triennale' 'via informatica,29', 'informatica@gmail.com', 'www.informatica.com', 5);
+   
+   
+-- Inserire dati nella tabella "students"
+INSERT INTO students (name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id) VALUES 
+    ('Giuseppe', 'Verdi', '1988-10-10', 'A8HG3JK9P2S4L6TR', '1999-06-05', 333, 'giuseppeverdi@email.com', 1);
+
+INSERT INTO students (name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id) VALUES 
+    ('Antonio', 'Giallo', '1995-08-12', 'B7GG2ST9G2D5S8GG', '2020-02-09', 621, 'antoniogiallo@email.com', 2);
+   
+INSERT INTO students (name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id) VALUES 
+    ('Gianni', 'Rossi', '1982-05-03', 'N5RT3SG9D2A4D7BR', '2000-11-10', 489, 'giannirossi@email.com', 3);
+   
+INSERT INTO students (name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id) VALUES 
+    ('Luigi', 'Nero', '1980-02-10', 'A2TG8GS6G2S4D8LL', '2003-08-08', 387, 'luiginero@email.com', 4);
+   
+INSERT INTO students (name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id) VALUES 
+    ('Alessandro', 'Arancio', '1993-11-05', 'B7DA5GR6D1S2T3YG', '2005-11-02', 255, 'alessandroarancio@email.com', 5);
+   
+   
+ -- Modificare un record nella tabella "students"
+UPDATE degrees SET address = 'via geografia, 88' WHERE id = 3;
+
+-- Cancellare un record nella tabella "degrees"
+DELETE FROM degrees WHERE id = 1;
